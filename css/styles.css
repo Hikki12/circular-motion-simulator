@@ -1,0 +1,14 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    transition: 0.5s;
+}
+
+ html, body {
+    background: rgb(17, 17, 17);
+    /* background: white; */
+    color: #fff;
+    width: 100%;
+    overflow-x: hidden;
+ }
