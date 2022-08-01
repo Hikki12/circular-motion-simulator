@@ -30,8 +30,6 @@ const updateCloseWise = (e) => {
     clockwise = clockwiseButton.checked ? 1 : -1;
 }
 
-
-
 speedRange.addEventListener('input', updateSpeedRange);
 radiusRange.addEventListener('input', updateRadiusRange);
 clockwiseButton.addEventListener('click', updateCloseWise);
@@ -81,14 +79,26 @@ let circle = function( sketch ) {
         sketch.fill(...lineColor);
         sketch.stroke(...lineColor);
         sketch.beginShape();
+
+        const error = 0.3;
+
         for (let i = 0; i < 1; i++) {
+
           x = radiusValue * sketch.map(sketch.cos(2 * Math.PI * speedValue * t * clockwise), -1, 1, -200, 200);
           y = radiusValue * sketch.map(sketch.sin(2 * Math.PI * speedValue * t * clockwise), -1, 1, -200, 200);
+          
+          const angle = - Math.atan2(y, x);
+
+          if (angle >= Math.PI/2 - error && angle <= Math.PI/2 + error){
+            sketch.stroke(206, 37, 123);
+            sketch.fill(206, 37, 123);
+          }
+          
           sketch.strokeWeight(lineWeight);
           sketch.line(0, 0, x, y);
           sketch.circle(x, y, pointRadius);
           t += dt;
-        //   console.log(t);
+
         }
         sketch.endShape();
     };
@@ -110,9 +120,7 @@ let xsignal = (sketch) => {
         sketch.beginShape();
         for(let i=0; i < 20; i++){
             x = sketch.map(x, -200, 200, -width/2, width/2);
-            // y = sketch.map(y, -200, 200, -height/2, height/2);
             sketch.strokeWeight(lineWeight);
-            // sketch.line(0, 0, x, t);
             sketch.circle(x, t, pointRadius);
         }
         sketch.endShape();
@@ -147,5 +155,5 @@ let ysignal = (sketch) => {
 
 
 let circleCanvas = new p5(circle, 'circleCanvasContainer');
-let xSignalCanvas = new p5(xsignal, 'xSignalCanvasContainer');
-let ySignalCanvas = new p5(ysignal, 'ySignalCanvasContainer');
+// let xSignalCanvas = new p5(xsignal, 'xSignalCanvasContainer');
+// let ySignalCanvas = new p5(ysignal, 'ySignalCanvasContainer');
