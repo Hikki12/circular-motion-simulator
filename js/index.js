@@ -18,8 +18,8 @@ const pauseIcon = `
 
 
 // VARIABLES <---------------------
-let speedValue = 1;
-let radiusValue = 1;
+let speedValue = 0.3;
+let radiusValue = 0.8;
 let clockwise = 1;
 
 
@@ -45,10 +45,10 @@ const togglePlayState = (e) => {
     playButton.innerHTML = playButton.classList.contains('paused') ? pauseIcon : playIcon;
 }
 
-speedRange.addEventListener('input', updateSpeedRange);
-radiusRange.addEventListener('input', updateRadiusRange);
-clockwiseButton.addEventListener('click', updateCloseWise);
-playButton.addEventListener('click', togglePlayState);
+// speedRange.addEventListener('input', updateSpeedRange);
+// radiusRange.addEventListener('input', updateRadiusRange);
+// clockwiseButton.addEventListener('click', updateCloseWise);
+// playButton.addEventListener('click', togglePlayState);
 
 // CANVAS SETTINGS <-----------------
 const circleCanvasContainer = document.getElementById('circleCanvasContainer');
@@ -68,11 +68,11 @@ const FPS = 30;
 
 
 const pointRadius = 20;
-const canvasBackgroundColor = [17, 17, 17]; 
-// const canvasBackgroundColor = [255, 255, 255];
+// const canvasBackgroundColor = [17, 17, 17]; 
+const canvasBackgroundColor = [255, 255, 255];
 
-const lineColor = [200, 238, 33];
-const enhanceColor = [206, 37, 123];
+const lineColor = [235, 97, 52];
+const enhanceColor = [80, 80, 80];
 const lineWeight = 4;
 
 
@@ -111,7 +111,7 @@ let circle = function( sketch ) {
             sketch.circle(x, y, pointRadius);
         }
 
-        if(!playButton.classList.contains('paused'))
+        // if(!playButton.classList.contains('paused'))
             t += dt;
 
         sketch.endShape();

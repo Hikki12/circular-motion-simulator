@@ -1,45 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Circular waves</title>
+
     <!-- CSS styles -->
     <link rel="stylesheet" href="./css/styles.css">
 
     <!-- daisyUI + TailwindCSS -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.20.0/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body>
     <!-- Main view -->
     <main class="min-h-screen">
         <div class="container mx-auto max-w-[1200px] min-h-screen py-12 px-4">
-            <h3 class="text-center font-base text-xl mb-4 lg:mb-12">MOVIMIENTO CIRCULAR</h3>
+            <h3 class="text-center font-bold text-xl mb-4 lg:mb-12 text-orange-600">MOVIMIENTO CIRCULAR</h3>
             <div class="grid place-content-center md:grid-cols-2 gap-6">
                 <div class="flex flex-col-reverse md:flex-col justify-center align-center gap-6 w-[95%] mx-auto h-96">
-                    <div class="w-full h-full rounded-md" id="circleCanvasContainer">
+                    <div class="w-full h-full min-w-[330px] rounded-md" id="circleCanvasContainer">
                         <!-- <canvas id="circle-canvas" class="w-full h-full border"></canvas> -->
                     </div>
                 </div>
-                <div class="px-4 lg:px-12 py-6">
-                    <div class="w-full flex justify-center gap-3">
-                        <div id="radiusRadialProgress" class="radial-progress text-accent text-4xl" style="--value:80; --size:8rem; ">80u</div>
-                        <div id="speedRadialProgress" class="radial-progress text-secondary text-4xl" style="--value:50; --size:12rem; ">30rpm</div>
+                <div class="px-4 lg:px-12 grid place-content-center py-6 overflow-x-auto">
+                    <div class="flex gap-4 justify-center mb-4">
+                        <div>                            
+                            <!-- The button to open modal -->
+                            <label for="my-modal-1" class="btn btn-circle modal-button btn-outline btn-warning">1</label>
+                            <!-- Put this part before -->
+                            <input type="checkbox" id="my-modal-1" class="modal-toggle" />
+                            <div class="modal">
+                                <div class="modal-box relative bg-white text-black">
+                                <label for="my-modal-1" class="btn btn-sm btn-circle btn-primary text-white absolute right-2 top-2">✕</label>
+                                <h3 class="text-lg font-bold">PASO 1</h3>
+                                <p class="py-4">Haciendo uso de un cronómetro, mida el tiempo que le toma a la partícula girar el número de vueltas que se especifica en la segunda columna de la tabla.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>                            
+                            <!-- The button to open modal -->
+                            <label for="my-modal-2" class="btn btn-circle modal-button btn-outline btn-warning">2</label>
+                            <!-- Put this part before -->
+                            <input type="checkbox" id="my-modal-2" class="modal-toggle" />
+                            <div class="modal">
+                                <div class="modal-box relative bg-white text-black">
+                                    <label for="my-modal-2" class="btn btn-sm btn-circle btn-primary text-white absolute right-2 top-2">✕</label>
+                                    <h3 class="text-lg font-bold">PASO 2</h3>
+                                    <p class="py-4">Con los datos de la columna 2 y 3 de la tabla, determine la rapidez angular que tuvo la partícula en cada experimento. Complete la columna 4 con estos datos.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>                            
+                            <!-- The button to open modal -->
+                            <label for="my-modal-3" class="btn btn-circle modal-button btn-outline btn-error animate-bounce">E</label>
+                            <!-- Put this part before -->
+                            <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+                            <div class="modal">
+                                <div class="modal-box relative bg-white text-black">
+                                <label for="my-modal-3" class="btn btn-sm btn-circle btn-primary text-white absolute right-2 top-2">✕</label>
+                                <h3 class="text-lg font-bold">Conclusión</h3>
+                                <p class="py-4">Analice los resultados obtenidos y determine si la partícula estuvo dotada o no de un MCU. <b class="font-bold text-black">Recuerde: si su rapidez angular de la partícula en cada experimento es la misma (o muy similar), entonces se puede afirmar que el movimiento es un MCU.</b></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button id="playButton" class="btn btn-accent btn-circle mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                    </button>
-                    <div class="flex flex-col gap-6 maw-w-[300px]">
-                        <div class="form-control">
-                            <label class="label cursor-pointer">
-                              <span class="label-text">Clockwise:</span>
-                              <input id="clockwiseButton" type="checkbox" class="toggle toggle-secondary" checked />
-                            </label>
-                          </div>
-                        <input id="radiusRange" type="range" min="0" max="100" value="80" class="range range-accent" />
-                        <input id="speedRange" type="range" min="0" max="60" value="30" class="range range-secondary" />
+
+                    <div class="overflow-x-auto">
+                        <table class="table w-full">
+                          <!-- head -->
+                          <thead>
+                            <tr>
+                              <th>N</th>
+                              <th>Ángulo</th>
+                              <th>Tiempo</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- row 1 -->
+                            <tr>
+                              <th>2  PI</th>
+                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
+                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
+                            </tr>
+                            <!-- row 2 -->
+                            <tr>
+                              <th>4 PI</th>
+                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
+                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
+                            </tr>
+                            <!-- row 3 -->
+                            <tr>
+                              <th>6 PI</th>
+                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
+                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+
+                    <label for="quiz-modal" class="btn modal-button ml-auto mt-5 max-w-[200px]"> Evaluarme >></label>
+
+                    <!-- Put this part before -->
+                    <input type="checkbox" id="quiz-modal" class="modal-toggle" />
+                    <div class="modal">
+                    <div class="modal-box w-11/12 max-w-5xl">
+                        <h3 class="font-bold text-lg">Evaluación MCU</h3>
+                        <p class="font-bold py-4">...</p>
+                        <div class="modal-action">
+                        <label for="quiz-modal" class="btn">Terminar</label>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>

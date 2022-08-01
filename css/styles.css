@@ -8,9 +8,9 @@
 }
 
  html, body {
-    background: rgb(17, 17, 17);
+    /* background: rgb(17, 17, 17); */
     /* background: white; */
-    color: #fff;
+    /* color: #fff; */
     width: 100%;
     overflow-x: hidden;
  }
