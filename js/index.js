@@ -80,7 +80,7 @@ let circle = function( sketch ) {
         sketch.stroke(...lineColor);
         sketch.beginShape();
 
-        const error = 0.3;
+        const error = 0.1;
 
         for (let i = 0; i < 1; i++) {
 
@@ -93,10 +93,11 @@ let circle = function( sketch ) {
             sketch.stroke(206, 37, 123);
             sketch.fill(206, 37, 123);
           }
-          
+
           sketch.strokeWeight(lineWeight);
           sketch.line(0, 0, x, y);
           sketch.circle(x, y, pointRadius);
+          
           t += dt;
 
         }
