@@ -1,15 +1,39 @@
-// GUI ELEMENTS <------------------
+// GUI ELEMENTS ------------------
 const speedRange = document.getElementById('speedRange');
 const radiusRange = document.getElementById('radiusRange');
 const speedRadialProgress = document.getElementById('speedRadialProgress');
 const radiusRadialProgress = document.getElementById('radiusRadialProgress');
 const clockwiseButton = document.getElementById('clockwiseButton');
 const playButton = document.getElementById('playButton');
+const tableContainer = document.getElementById('tableContainer');
+const checkTableButton = document.getElementById('checkTableButton');
+
+// SOME CONSTANTS --------------------
+
+const table = [
+    {
+        angleLabel: '2 PI',
+        angle: 2 * Math.PI,
+        time: 0.0,
+        speed: 0.0,
+    },
+    {
+        angleLabel: '4 PI',
+        angle: 4 * Math.PI,
+        time: 0.0,
+        speed: 0.0,
+    },
+    {
+        angleLabel: '6 PI',
+        angle: 6 * Math.PI,
+        time: 0.0,
+        speed: 0.0,
+    },
+]
 
 
 const playIcon = `
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
-
 `;
 
 const pauseIcon = `
@@ -17,7 +41,7 @@ const pauseIcon = `
 `;
 
 
-// VARIABLES <---------------------
+// VARIABLES ---------------------
 let speedValue = 0.3;
 let radiusValue = 0.8;
 let clockwise = 1;
@@ -28,7 +52,6 @@ const updateSpeedRange = (e) => {
     speedRadialProgress.innerHTML = `${speedRange.value} rpm`;
     speedRadialProgress.style = `--value:${speedValue * 100}; --size:12rem;`
 }
-
 
 const updateRadiusRange = (e) => {
     radiusValue = radiusRange.value / 100;
@@ -45,12 +68,65 @@ const togglePlayState = (e) => {
     playButton.innerHTML = playButton.classList.contains('paused') ? pauseIcon : playIcon;
 }
 
-// speedRange.addEventListener('input', updateSpeedRange);
-// radiusRange.addEventListener('input', updateRadiusRange);
-// clockwiseButton.addEventListener('click', updateCloseWise);
-// playButton.addEventListener('click', togglePlayState);
 
-// CANVAS SETTINGS <-----------------
+const renderTable = () => {
+    const html = `
+        <table class="table w-full">
+            <thead>
+                <tr>
+                    <th>N</th>
+                    <th>Ángulo</th>
+                    <th>Tiempo</th>
+                    <th>Rapidez</th>
+                </tr>
+            </thead>
+            <tbody>
+            ${table.map((row, i) =>(
+                `
+                <tr>
+                    <th>${i}</th>
+                    <th>${row.angleLabel}</th>
+                    <th> <input value="${row.calculatedTime?.toFixed(2) ?? '0.0'}"  id="time${i}" type="text" placeholder="0.0" class="${row.timeCorrect ? 'border border-green-500': 'border border-orange-600' } input w-full max-w-xs" /> </th>
+                    <th> <input value="${row.calculatedSpeed?.toFixed(2) ?? '0.0'}" id="speed${i}" type="text" placeholder="0.0" class="${row.speedCorrect ? 'border border-green-500': 'border border-orange-600' } input w-full max-w-xs" /></th>
+                </tr>
+                `
+            ))}
+            </tbody>
+        </table>
+    `;
+
+    tableContainer.innerHTML = html;
+}
+
+const evaluateAnswer = (reply, real, error=0.05) => {
+    const limit1 = 1 - error;
+    const limit2 = 1 + error;
+    return reply >= real * limit1 && reply <= real * limit2;
+}
+
+const checkTable = () => {
+    table.map((row, i) => {
+        const calculatedTime = Number(document.getElementById(`time${i}`).value);
+        const calculatedSpeed = Number(document.getElementById(`speed${i}`).value);
+        row.calculatedSpeed = calculatedSpeed;
+        row.calculatedTime = calculatedTime;
+        row.timeCorrect = evaluateAnswer(calculatedTime, row.time);
+        row.speedCorrect = evaluateAnswer(calculatedSpeed, row.speed);
+    });
+    renderTable();
+    console.log(table);
+}
+
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+const getRandomVariables = () => {
+    speed = getRandomVariables()
+}
+
+
+// CANVAS SETTINGS -----------------
+
 const circleCanvasContainer = document.getElementById('circleCanvasContainer');
 
 // For graph
@@ -68,7 +144,6 @@ const FPS = 30;
 
 
 const pointRadius = 20;
-// const canvasBackgroundColor = [17, 17, 17]; 
 const canvasBackgroundColor = [255, 255, 255];
 
 const lineColor = [235, 97, 52];
@@ -127,5 +202,8 @@ let circle = function( sketch ) {
 
 let circleCanvas = new p5(circle, 'circleCanvasContainer');
 
-updateSpeedRange();
-updateRadiusRange();
+
+// RUNNING INITIAL FUNCTIONS
+
+renderTable();
+checkTableButton.addEventListener('click', checkTable)

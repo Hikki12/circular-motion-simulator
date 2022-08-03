@@ -68,44 +68,14 @@
                         </div>
                     </div>
 
-                    <div class="overflow-x-auto">
-                        <table class="table w-full">
-                          <!-- head -->
-                          <thead>
-                            <tr>
-                              <th>N</th>
-                              <th>Ángulo</th>
-                              <th>Tiempo</th>
-                              <th>Rapidez</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <!-- row 1 -->
-                            <tr>
-                              <th>1</th>
-                              <th>2  PI</th>
-                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
-                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
-                            </tr>
-                            <!-- row 2 -->
-                            <tr>
-                              <th>2</th>
-                              <th>4 PI</th>
-                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
-                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
-                            </tr>
-                            <!-- row 3 -->
-                            <tr>
-                              <th>3</th>
-                              <th>6 PI</th>
-                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
-                              <td><input type="text" placeholder="0.0" class="input w-full max-w-xs" /></td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    <div id="tableContainer" class="overflow-x-auto">
+                
                     </div>
 
-                    <label for="quiz-modal" class="btn modal-button ml-auto mt-5 max-w-[200px]"> Evaluarme >></label>
+                    <div class="flex justify-between items-center mt-5">
+                        <button id="checkTableButton" class="btn btn-outline btn-primary">check</button>
+                        <label for="quiz-modal" class="btn modal-button max-w-[200px]"> Evaluarme >></label>
+                    </div>
 
                     <!-- Put this part before -->
                     <input type="checkbox" id="quiz-modal" class="modal-toggle" />
