@@ -8,29 +8,10 @@ const playButton = document.getElementById('playButton');
 const tableContainer = document.getElementById('tableContainer');
 const checkTableButton = document.getElementById('checkTableButton');
 
+const speedLabel = document.getElementById('speedLabel');
+const radiusLabel = document.getElementById('radiusLabel');
+
 // SOME CONSTANTS --------------------
-
-const table = [
-    {
-        angleLabel: '2 PI',
-        angle: 2 * Math.PI,
-        time: 0.0,
-        speed: 0.0,
-    },
-    {
-        angleLabel: '4 PI',
-        angle: 4 * Math.PI,
-        time: 0.0,
-        speed: 0.0,
-    },
-    {
-        angleLabel: '6 PI',
-        angle: 6 * Math.PI,
-        time: 0.0,
-        speed: 0.0,
-    },
-]
-
 
 const playIcon = `
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
@@ -40,11 +21,36 @@ const pauseIcon = `
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
 `;
 
-
 // VARIABLES ---------------------
-let speedValue = 0.3;
+let speedValue = 0.25;
 let radiusValue = 0.8;
 let clockwise = 1;
+
+
+const table = [
+    {
+        angleLabel: '2',
+        angle: 2 * Math.PI,
+        laps: 2,
+        speed: 0,
+        time: 0.0,
+    },
+    {
+        angleLabel: '4',
+        angle: 4 * Math.PI,
+        laps: 4,
+        speed: 0,
+        time: 0.0,
+    },
+    {
+        angleLabel: '6',
+        angle: 6 * Math.PI,
+        laps: 6,
+        speed: 0,
+        time: 0.0,
+    },
+]
+
 
 
 const updateSpeedRange = (e) => {
@@ -75,15 +81,14 @@ const renderTable = () => {
             <thead>
                 <tr>
                     <th>N</th>
-                    <th>Ángulo</th>
-                    <th>Tiempo</th>
-                    <th>Rapidez</th>
+                    <th>Vueltas</th>
+                    <th>Tiempo (seg)</th>
+                    <th>Rapidez Angular (rad /s )</th>
                 </tr>
             </thead>
             <tbody>
             ${table.map((row, i) =>(
-                `
-                <tr>
+                `<tr>
                     <th>${i}</th>
                     <th>${row.angleLabel}</th>
                     <th> <input value="${row.calculatedTime?.toFixed(2) ?? '0.0'}"  id="time${i}" type="text" placeholder="0.0" class="${row.timeCorrect ? 'border border-green-500': 'border border-orange-600' } input w-full max-w-xs" /> </th>
@@ -96,6 +101,14 @@ const renderTable = () => {
     `;
 
     tableContainer.innerHTML = html;
+}
+
+const updateTable = () => {
+    table.map((row, i) =>{
+        row.speed = 2 * Math.PI * speedValue;
+        row.time = row.laps / speedValue;
+    });
+    console.log("table: ", table);
 }
 
 const evaluateAnswer = (reply, real, error=0.05) => {
@@ -114,14 +127,19 @@ const checkTable = () => {
         row.speedCorrect = evaluateAnswer(calculatedSpeed, row.speed);
     });
     renderTable();
-    console.log(table);
 }
 
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
+
 const getRandomVariables = () => {
-    speed = getRandomVariables()
+    speed = getRandomArbitrary(0.3, 0.8);
+}
+
+const displayVariables = () => {
+    speedLabel.innerHTML = `<b>Speed:</b>  ${speedValue * 60} rpm | ${speedValue} Hz`;
+    radiusLabel.innerHTML = `<b>Radius:</b>  ${radiusValue * 100} u`;
 }
 
 
@@ -137,10 +155,7 @@ let t = 0;
 
 let phase = 0;
 
-
-const Fs = 30;
-const dt = 1 / Fs;
-const FPS = 30;
+const FPS = 40;
 
 
 const pointRadius = 20;
@@ -149,6 +164,14 @@ const canvasBackgroundColor = [255, 255, 255];
 const lineColor = [235, 97, 52];
 const enhanceColor = [80, 80, 80];
 const lineWeight = 4;
+
+let lastTime = Date.now();
+
+const sampleTime = () => {
+    const elapsed = (Date.now() - lastTime) / 1000;
+    lastTime = Date.now();
+    return elapsed;
+}
 
 
 let circle = function( sketch ) {
@@ -163,8 +186,7 @@ let circle = function( sketch ) {
   
     sketch.draw = function() {
 
-        const error = 0.1;
-
+        const error = 0.2;
         sketch.background(...canvasBackgroundColor);
         sketch.translate(width /2, height /2);
         sketch.fill(...lineColor);
@@ -173,22 +195,24 @@ let circle = function( sketch ) {
 
         x = radiusValue * sketch.map(sketch.cos(2 * Math.PI * speedValue * t * clockwise), -1, 1, -height / 2, height/ 2);
         y = radiusValue * sketch.map(sketch.sin(2 * Math.PI * speedValue * t * clockwise), -1, 1, -height / 2, height/ 2);
-        
+
         const angle = - Math.atan2(y, x);
 
         sketch.strokeWeight(lineWeight);
         sketch.line(0, 0, x, y);
         sketch.circle(x, y, pointRadius);
         
-        if (angle >= Math.PI/2 - error && angle <= Math.PI/2 + error){
+        if (angle >= Math.PI / 2 - error && angle <= Math.PI / 2 + error){
             sketch.fill(...enhanceColor);
             sketch.stroke(...enhanceColor);
             sketch.circle(x, y, pointRadius);
         }
 
-        // if(!playButton.classList.contains('paused'))
-            t += dt;
-
+        console.log()
+        t += sampleTime();
+        // t += 1 / sketch.getFrameRate();
+        // console.log("fps: ")
+    
         sketch.endShape();
     };
 
@@ -205,5 +229,7 @@ let circleCanvas = new p5(circle, 'circleCanvasContainer');
 
 // RUNNING INITIAL FUNCTIONS
 
+updateTable();
 renderTable();
+displayVariables();
 checkTableButton.addEventListener('click', checkTable)
