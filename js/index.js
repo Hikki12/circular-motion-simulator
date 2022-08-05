@@ -134,11 +134,13 @@ function getRandomArbitrary(min, max) {
 }
 
 const getRandomVariables = () => {
-    speed = getRandomArbitrary(0.3, 0.8);
+    speedValue = getRandomArbitrary(0.3, 0.8);
+    clockwise = Math.random() < 0.5 ? 1 : -1;
+    console.log("speed: ", speedValue)
 }
 
 const displayVariables = () => {
-    speedLabel.innerHTML = `<b>Speed:</b>  ${speedValue * 60} rpm | ${speedValue} Hz`;
+    speedLabel.innerHTML = `<b>Speed:</b>  ${(speedValue * 60).toFixed(2)} rpm | ${speedValue.toFixed(2)} Hz`;
     radiusLabel.innerHTML = `<b>Radius:</b>  ${radiusValue * 100} u`;
 }
 
@@ -207,11 +209,7 @@ let circle = function( sketch ) {
             sketch.stroke(...enhanceColor);
             sketch.circle(x, y, pointRadius);
         }
-
-        console.log()
         t += sampleTime();
-        // t += 1 / sketch.getFrameRate();
-        // console.log("fps: ")
     
         sketch.endShape();
     };
@@ -229,6 +227,7 @@ let circleCanvas = new p5(circle, 'circleCanvasContainer');
 
 // RUNNING INITIAL FUNCTIONS
 
+getRandomVariables();
 updateTable();
 renderTable();
 displayVariables();
