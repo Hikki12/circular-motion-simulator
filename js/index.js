@@ -77,7 +77,7 @@ const togglePlayState = (e) => {
 
 const renderTable = () => {
     const html = `
-        <table class="table w-full">
+        <table class="table w-full text-center">
             <thead>
                 <tr>
                     <th>N</th>
