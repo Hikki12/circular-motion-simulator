@@ -31,21 +31,21 @@ const table = [
     {
         angleLabel: '2',
         angle: 2 * Math.PI,
-        laps: 2,
+        laps: 4,
         speed: 0,
         time: 0.0,
     },
     {
         angleLabel: '4',
         angle: 4 * Math.PI,
-        laps: 4,
+        laps: 8,
         speed: 0,
         time: 0.0,
     },
     {
         angleLabel: '6',
         angle: 6 * Math.PI,
-        laps: 6,
+        laps: 16,
         speed: 0,
         time: 0.0,
     },
@@ -90,7 +90,7 @@ const renderTable = () => {
             ${table.map((row, i) =>(
                 `<tr>
                     <th>${i}</th>
-                    <th>${row.angleLabel}</th>
+                    <th>${row.laps}</th>
                     <th> <input value="${row.calculatedTime?.toFixed(2) ?? '0.0'}"  id="time${i}" type="text" placeholder="0.0" class="${row.timeCorrect ? 'border border-green-500': 'border border-orange-600' } input w-full max-w-xs" /> </th>
                     <th> <input value="${row.calculatedSpeed?.toFixed(2) ?? '0.0'}" id="speed${i}" type="text" placeholder="0.0" class="${row.speedCorrect ? 'border border-green-500': 'border border-orange-600' } input w-full max-w-xs" /></th>
                 </tr>
@@ -136,7 +136,6 @@ function getRandomArbitrary(min, max) {
 const getRandomVariables = () => {
     speedValue = getRandomArbitrary(0.3, 0.8);
     clockwise = Math.random() < 0.5 ? 1 : -1;
-    console.log("speed: ", speedValue)
 }
 
 const displayVariables = () => {
