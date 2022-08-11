@@ -77,7 +77,7 @@ const togglePlayState = (e) => {
 
 const renderTable = () => {
     const html = `
-        <table class="table w-full text-center">
+     <table class="tw-table tw-w-full tw-text-center">
             <thead>
                 <tr>
                     <th>N</th>
@@ -91,10 +91,9 @@ const renderTable = () => {
                 `<tr>
                     <th>${i}</th>
                     <th>${row.laps}</th>
-                    <th> <input value="${row.calculatedTime?.toFixed(2) ?? '0.0'}"  id="time${i}" type="text" placeholder="0.0" class="${row.timeCorrect ? 'border border-green-500': 'border border-orange-600' } input w-full max-w-xs" /> </th>
-                    <th> <input value="${row.calculatedSpeed?.toFixed(2) ?? '0.0'}" id="speed${i}" type="text" placeholder="0.0" class="${row.speedCorrect ? 'border border-green-500': 'border border-orange-600' } input w-full max-w-xs" /></th>
-                </tr>
-                `
+                    <th> <input value="${row.calculatedTime?.toFixed(2) ?? '0.0'}"  id="time${i}" type="text" placeholder="0.0" class="${row.timeCorrect ? 'border border-green-500': 'border border-orange-600' } tw-input tw-w-full tw-max-w-xs" /> </th>
+                    <th> <input value="${row.calculatedSpeed?.toFixed(2) ?? '0.0'}" id="speed${i}" type="text" placeholder="0.0" class="${row.speedCorrect ? 'border border-green-500': 'border border-orange-600' } tw-input tw-w-full tw-max-w-xs" /></th>
+                </tr>`
             ))}
             </tbody>
         </table>
@@ -108,7 +107,6 @@ const updateTable = () => {
         row.speed = 2 * Math.PI * speedValue;
         row.time = row.laps / speedValue;
     });
-    console.log("table: ", table);
 }
 
 const evaluateAnswer = (reply, real, error=0.05) => {

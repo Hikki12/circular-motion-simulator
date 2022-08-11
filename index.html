@@ -12,75 +12,75 @@
 </head>
 <body>
     <!-- Main view -->
-    <main class="min-h-screen" data-theme="light">
-        <div class="container mx-auto max-w-[1200px] min-h-screen py-12 px-4">
-            <h3 class="text-center font-bold text-xl mb-4 lg:mb-12 text-orange-600">MOVIMIENTO CIRCULAR</h3>
-            <div class="grid place-content-center md:grid-cols-2 gap-6">
-                <div class="flex flex-col-reverse md:flex-col justify-center align-center gap-3 w-[95%] mx-auto h-96">
-                    <div class="w-full h-full min-w-[330px] rounded-md" id="circleCanvasContainer">
+    <main class="tw-min-h-screen" data-theme="light">
+        <div class="tw-container tw-mx-auto tw-max-w-[1200px] tw-min-h-screen tw-py-12 tw-px-4">
+            <h3 class="tw-text-center tw-font-bold tw-text-xl tw-mb-4 lg:tw-mb-12 tw-text-orange-600">MOVIMIENTO CIRCULAR</h3>
+            <div class="tw-grid tw-place-content-center md:tw-grid-cols-2 tw-gap-6">
+                <div class="tw-flex tw-flex-col-reverse md:tw-flex-col tw-justify-center tw-align-center tw-gap-3 tw-w-[95%] tw-mx-auto tw-h-96">
+                    <div class="tw-w-full tw-h-full tw-min-w-[330px] tw-rounded-md" id="circleCanvasContainer">
                         <!-- <canvas id="circle-canvas" class="w-full h-full border"></canvas> -->
                     </div>
                     <span id="speedLabel">Speed: 30rpm</span>
                     <span id="radiusLabel">Radius: 0.5</span>
                 </div>
-                <div class="px-4 lg:px-12 grid place-content-center py-6 overflow-x-auto">
-                    <div class="flex gap-4 justify-center mb-4">
+                <div class="tw-px-4 lg:tw-px-12 tw-grid tw-place-content-center tw-py-6 tw-tw-overflow-x-auto">
+                    <div class="tw-flex tw-gap-4 tw-justify-center tw-mb-4">
                         <div>                            
-                            <!-- The button to open modal -->
-                            <label for="my-modal-1" class="btn btn-circle modal-button btn-outline btn-warning">1</label>
+                            <!-- The button to open tw-modal -->
+                            <label for="my-tw-modal-1" class="tw-btn tw-btn-circle tw-modal-button tw-btn-outline tw-btn-warning">1</label>
                             <!-- Put this part before -->
-                            <input type="checkbox" id="my-modal-1" class="modal-toggle" />
-                            <div class="modal">
-                                <div class="modal-box relative bg-white text-black">
-                                <label for="my-modal-1" class="btn btn-sm btn-circle btn-primary text-white absolute right-2 top-2">✕</label>
-                                <h3 class="text-lg font-bold">PASO 1</h3>
-                                <p class="py-4">Haciendo uso de un cronómetro, mida el tiempo que le toma a la partícula girar el número de vueltas que se especifica en la segunda columna de la tabla.</p>
+                            <input type="checkbox" id="my-tw-modal-1" class="tw-modal-toggle" />
+                            <div class="tw-modal">
+                                <div class="tw-modal-box tw-relative tw-bg-white tw-text-black">
+                                <label for="my-tw-modal-1" class="tw-btn tw-btn-sm tw-btn-circle tw-btn-primary tw-text-white tw-absolute tw-right-2 tw-top-2">✕</label>
+                                <h3 class="tw-text-lg tw-font-bold">PASO 1</h3>
+                                <p class="tw-py-4">Haciendo uso de un cronómetro, mida el tiempo que le toma a la partícula girar el número de vueltas que se especifica en la segunda columna de la tabla.</p>
                                 </div>
                             </div>
                         </div>
                         <div>                            
-                            <!-- The button to open modal -->
-                            <label for="my-modal-2" class="btn btn-circle modal-button btn-outline btn-warning">2</label>
+                            <!-- The button to open tw-modal -->
+                            <label for="my-tw-modal-2" class="tw-btn tw-btn-circle tw-modal-button tw-btn-outline tw-btn-warning">2</label>
                             <!-- Put this part before -->
-                            <input type="checkbox" id="my-modal-2" class="modal-toggle" />
-                            <div class="modal">
-                                <div class="modal-box relative bg-white text-black">
-                                    <label for="my-modal-2" class="btn btn-sm btn-circle btn-primary text-white absolute right-2 top-2">✕</label>
-                                    <h3 class="text-lg font-bold">PASO 2</h3>
-                                    <p class="py-4">Con los datos de la columna 2 y 3 de la tabla, determine la rapidez angular que tuvo la partícula en cada experimento. Complete la columna 4 con estos datos.</p>
+                            <input type="checkbox" id="my-tw-modal-2" class="tw-modal-toggle" />
+                            <div class="tw-modal">
+                                <div class="tw-modal-box tw-relative tw-bg-white tw-text-black">
+                                    <label for="my-tw-modal-2" class="tw-btn tw-btn-sm tw-btn-circle tw-btn-primary tw-text-white tw-absolute tw-right-2 tw-top-2">✕</label>
+                                    <h3 class="tw-text-lg tw-font-bold">PASO 2</h3>
+                                    <p class="tw-py-4">Con los datos de la columna 2 y 3 de la tabla, determine la rapidez angular que tuvo la partícula en cada experimento. Complete la columna 4 con estos datos.</p>
                                 </div>
                             </div>
                         </div>
                         <div>                            
-                            <!-- The button to open modal -->
-                            <label for="my-modal-3" class="btn btn-circle modal-button btn-outline btn-error animate-bounce">E</label>
+                            <!-- The button to open tw-modal -->
+                            <label for="my-tw-modal-3" class="tw-btn tw-btn-circle tw-modal-button tw-btn-outline tw-btn-error animate-bounce">E</label>
                             <!-- Put this part before -->
-                            <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-                            <div class="modal">
-                                <div class="modal-box relative bg-white text-black">
-                                <label for="my-modal-3" class="btn btn-sm btn-circle btn-primary text-white absolute right-2 top-2">✕</label>
-                                <h3 class="text-lg font-bold">Conclusión</h3>
-                                <p class="py-4">Analice los resultados obtenidos y determine si la partícula estuvo dotada o no de un MCU. <b class="font-bold text-black">Recuerde: si su rapidez angular de la partícula en cada experimento es la misma (o muy similar), entonces se puede afirmar que el movimiento es un MCU.</b></p>
+                            <input type="checkbox" id="my-tw-modal-3" class="tw-modal-toggle" />
+                            <div class="tw-modal">
+                                <div class="tw-modal-box tw-relative tw-bg-white tw-text-black">
+                                <label for="my-tw-modal-3" class="tw-btn tw-btn-sm tw-btn-circle tw-btn-primary tw-text-white tw-absolute tw-right-2 tw-top-2">✕</label>
+                                <h3 class="tw-text-lg tw-font-bold">Conclusión</h3>
+                                <p class="tw-py-4">Analice los resultados obtenidos y determine si la partícula estuvo dotada o no de un MCU. <b class="tw-font-bold tw-text-black">Recuerde: si su rapidez angular de la partícula en cada experimento es la misma (o muy similar), entonces se puede afirmar que el movimiento es un MCU.</b></p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div id="tableContainer" class="overflow-x-auto"></div>
+                    <div id="tableContainer" class="tw-overflow-x-auto"></div>
 
-                    <div class="flex justify-between items-center mt-5">
-                        <button id="checkTableButton" class="btn btn-outline btn-primary">check</button>
-                        <label for="quiz-modal" class="btn modal-button max-w-[200px]"> Evaluarme >></label>
+                    <div class="tw-flex tw-justify-between tw-items-center tw-mt-5">
+                        <button id="checkTableButton" class="tw-btn tw-btn-outline tw-btn-primary">check</button>
+                        <label for="quiz-tw-modal" class="tw-btn tw-modal-button tw-max-w-[200px]"> Evaluarme >></label>
                     </div>
 
                     <!-- Put this part before -->
-                    <input type="checkbox" id="quiz-modal" class="modal-toggle" />
-                    <div class="modal">
-                    <div class="modal-box w-11/12 max-w-5xl">
-                        <h3 class="font-bold text-lg">Evaluación MCU</h3>
-                        <p class="font-bold py-4">...</p>
-                        <div class="modal-action">
-                        <label for="quiz-modal" class="btn">Terminar</label>
+                    <input type="checkbox" id="quiz-tw-modal" class="tw-modal-toggle" />
+                    <div class="tw-modal">
+                    <div class="tw-modal-box w-11/12 tw-max-w-5xl">
+                        <h3 class="tw-font-bold tw-text-lg">Evaluación MCU</h3>
+                        <p class="tw-font-bold tw-py-4">...</p>
+                        <div class="tw-modal-action">
+                        <label for="quiz-tw-modal" class="tw-btn">Terminar</label>
                         </div>
                     </div>
                     </div>
