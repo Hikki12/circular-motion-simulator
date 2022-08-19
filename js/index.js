@@ -80,17 +80,17 @@ const renderTable = () => {
      <table class="tw-table tw-w-full tw-text-center">
             <thead>
                 <tr>
-                    <th>N</th>
                     <th>Vueltas</th>
-                    <th>Tiempo (seg)</th>
-                    <th>Rapidez Angular (rad /s )</th>
+                    <th>Tiempo</th>
+                    <th>Período</th>
+                    <th>Frecuencia</th>
                 </tr>
             </thead>
             <tbody>
             ${table.map((row, i) =>(
                 `<tr>
-                    <th>${i}</th>
                     <th>${row.laps}</th>
+                    <th> <input value="${row.calculatedTime?.toFixed(2) ?? '0.0'}"  id="time${i}" type="text" placeholder="0.0" class="${row.timeCorrect ? 'border border-green-500': 'border border-orange-600' } tw-input tw-w-full tw-max-w-xs" /> </th>
                     <th> <input value="${row.calculatedTime?.toFixed(2) ?? '0.0'}"  id="time${i}" type="text" placeholder="0.0" class="${row.timeCorrect ? 'border border-green-500': 'border border-orange-600' } tw-input tw-w-full tw-max-w-xs" /> </th>
                     <th> <input value="${row.calculatedSpeed?.toFixed(2) ?? '0.0'}" id="speed${i}" type="text" placeholder="0.0" class="${row.speedCorrect ? 'border border-green-500': 'border border-orange-600' } tw-input tw-w-full tw-max-w-xs" /></th>
                 </tr>`
@@ -116,6 +116,9 @@ const evaluateAnswer = (reply, real, error=0.05) => {
 }
 
 const checkTable = () => {
+    // T: tiempo medición
+    // N: número de vueltas
+    // Period = T / N
     table.map((row, i) => {
         const calculatedTime = Number(document.getElementById(`time${i}`).value);
         const calculatedSpeed = Number(document.getElementById(`speed${i}`).value);
